@@ -41,7 +41,6 @@ isort>=5.12.0
 mypy>=1.6.1
 
 # Core API Dependencies
-fastapi==0.95.1
 uvicorn==0.22.0
 gunicorn==20.1.0
 
