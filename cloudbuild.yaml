@@ -4,11 +4,13 @@ steps:
     args: ['build', '-t', 
            'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage', 
            '.']
+  
   # Docker Push
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 
            'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage']
-  # Entrypoint, timeout and environment variables
+  
+  # Create VM with container
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'gcloud'
     timeout: 240s
@@ -17,7 +19,18 @@ steps:
            '--container-image', 
            'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage',
            '--machine-type', 'e2-medium',
-           '--zone', 'us-central1-a']
+           '--zone', 'us-central1-a',
+           '--subnet', 'default',
+           '--tags', 'http-server',
+           '--boot-disk-size', '10GB']
     env:
       - 'CLOUDSDK_COMPUTE_REGION=us-central1'
       - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+
+# If your project ID is different from the Cloud Build project
+substitutions:
+  _CUSTOM_PROJECT_ID: techbio-c-suite-copilot # Replace with your actual project ID
+
+# Use this in case you need specific permissions for this build
+options:
+  logging: CLOUD_LOGGING_ONLY
