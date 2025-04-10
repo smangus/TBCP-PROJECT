@@ -10,7 +10,7 @@ automatic_scaling:
 # Environment variables
 env_variables:
   ENV: 'production'
-  # Add your application-specific environment variables here
+  ALLOWED_HOSTS: '*'
 
 # Handlers for static files (if needed)
 handlers:
