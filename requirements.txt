@@ -43,7 +43,6 @@ isort>=5.12.0
 mypy>=1.6.1
 
 # Core API Dependencies
-uvicorn==0.22.0
 gunicorn==20.1.0
 
 # Additional dependencies you might need later
